@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import java.lang.ArithmeticException
 
 class MainActivity : AppCompatActivity() {
@@ -95,7 +94,8 @@ class MainActivity : AppCompatActivity() {
                         first = prefix + first
                     }
 
-                    textInput?.text = (first.toDouble() + second.toDouble()).toString()
+                    var total = (first.toDouble() + second.toDouble()).toString()
+                    textInput?.text = doubleToInt(total)
                 }else if (result.contains("*")){
                     val splitValue = result.split("*")
                     var first = splitValue[0]
@@ -105,7 +105,8 @@ class MainActivity : AppCompatActivity() {
                         first = prefix + first
                     }
 
-                    textInput?.text = (first.toDouble() * second.toDouble()).toString()
+                    var total = (first.toDouble() * second.toDouble()).toString()
+                    textInput?.text = doubleToInt(total)
                 }else if (result.contains("/")){
                     val splitValue = result.split("/")
                     var first = splitValue[0]
@@ -119,7 +120,8 @@ class MainActivity : AppCompatActivity() {
                         textInput?.text = "Cannot divide by zero"
                         byZero = true
                     }else{
-                        textInput?.text = (first.toDouble() / second.toDouble()).toString()
+                        var total = (first.toDouble() / second.toDouble()).toString()
+                        textInput?.text = doubleToInt(total)
                     }
 
                 }else if (result.contains("%")){
@@ -135,7 +137,8 @@ class MainActivity : AppCompatActivity() {
                         textInput?.text = "Cannot % by zero"
                         byZero = true
                     }else{
-                        textInput?.text = (first.toDouble() / second.toDouble()).toString()
+                        var total = (first.toDouble() % second.toDouble()).toString()
+                        textInput?.text = doubleToInt(total)
                     }
 
                 }
@@ -148,11 +151,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun doubleToInt(value: String): String {
-        // TODO: display whole numbers
 
-        if (value.endsWith(".0")){
-            value.dropLast(2)
-            return value
+        if (value.endsWith(".0")) {
+            return value.dropLast(2)
         }
         return value
     }
